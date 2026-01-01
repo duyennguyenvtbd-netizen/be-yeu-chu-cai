@@ -1,0 +1,50 @@
+body {
+    background-color: #fffae6;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    color: #333;
+}
+
+.app-container {
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+}
+
+h1, h2 { color: #ff6600; text-transform: lowercase; }
+
+.char-display {
+    font-size: 120px;
+    font-weight: bold;
+    color: #4CAF50;
+    margin: 20px 0;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+.btn-play { background-color: #2196F3; color: white; }
+.btn-record { background-color: #f44336; color: white; }
+
+.game-box {
+    background: #e1f5fe;
+    padding: 20px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.word-missing { font-size: 40px; margin-bottom: 20px; }
+
+.feedback-text { font-style: italic; color: #555; min-height: 24px; }
