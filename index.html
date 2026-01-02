@@ -1,66 +1,52 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bé Học Chữ Cái Tiếng Việt</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <title>bé học chữ cái</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="main-container">
-        <nav class="menu-tabs">
-            <button onclick="showSection('pronounce')" class="tab-btn active">1. học phát âm</button>
-            <button onclick="showSection('trace')" class="tab-btn">2. bé tập tô</button>
-            <button onclick="showSection('game')" class="tab-btn">3. trò chơi</button>
-        </nav>
 
-        <section id="pronounce" class="content-section active">
-            <div class="card">
-                <div id="char-display" class="big-char">a</div>
-                <div class="illustration">
-                    <img id="example-img" src="https://images.unsplash.com/photo-1524704659690-3f7a3fe19bb2?w=400" alt="con cá">
-                    <p id="example-text">con cá</p>
-                </div>
-                <div class="feedback-box"><p id="feedback">cô mời bé học!</p></div>
-                <div class="btns">
-                    <button onclick="playSample()" class="btn-audio">nghe cô đọc</button>
-                    <button id="record-btn" class="btn-mic">bé phát âm</button>
-                </div>
-                <div class="nav-char">
-                    <button onclick="changeChar(-1)">chữ trước</button>
-                    <button onclick="changeChar(1)">chữ sau</button>
-                </div>
-            </div>
-        </section>
+<div class="app">
+  <h1>bé học chữ cái tiếng việt</h1>
 
-        <section id="trace" class="content-section">
-            <div class="card">
-                <h3>bé hãy tô theo nét đứt nhé</h3>
-                <div class="canvas-container">
-                    <canvas id="traceCanvas" width="300" height="300"></canvas>
-                    <div id="trace-guide" class="trace-bg">a</div>
-                </div>
-                <div class="btns">
-                    <button onclick="clearCanvas()">tô lại</button>
-                    <button onclick="nextTrace()">chữ tiếp theo</button>
-                </div>
-            </div>
-        </section>
+  <div class="menu">
+    <button onclick="showSection('phatam')">học phát âm</button>
+    <button onclick="showSection('vethe')">vẽ chữ</button>
+    <button onclick="showSection('trochoi')">trò chơi điền chữ</button>
+  </div>
 
-        <section id="game" class="content-section">
-            <div class="card">
-                <img id="game-img" src="https://images.unsplash.com/photo-1540244495603-d8a18397af2b?w=400" alt="con khỉ">
-                <div class="quiz-container">
-                    <p id="quiz-word">c_n khỉ</p>
-                    <div class="options">
-                        <button onclick="checkGame('o')">o</button>
-                        <button onclick="checkGame('a')">a</button>
-                        <button onclick="checkGame('u')">u</button>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- học phát âm -->
+  <div id="phatam" class="section">
+    <h2>học phát âm chữ cái</h2>
+    <div class="letter" id="currentLetter">a</div>
+    <button onclick="playLetter()">nghe cô đọc</button>
+    <button onclick="startListening()">con nói</button>
+    <p id="feedback"></p>
+    <button onclick="nextLetter()">chữ tiếp theo</button>
+  </div>
+
+  <!-- vẽ theo nét -->
+  <div id="vethe" class="section hidden">
+    <h2>vẽ theo nét chữ</h2>
+    <canvas id="drawCanvas" width="300" height="300"></canvas>
+    <p id="drawFeedback">con hãy vẽ theo nét chấm nhé</p>
+    <button onclick="clearCanvas()">vẽ lại</button>
+  </div>
+
+  <!-- trò chơi điền chữ -->
+  <div id="trochoi" class="section hidden">
+    <h2>điền chữ còn thiếu</h2>
+    <p id="word">c_n mèo</p>
+    <div class="choices">
+      <button onclick="chooseLetter('o')">o</button>
+      <button onclick="chooseLetter('a')">a</button>
+      <button onclick="chooseLetter('i')">i</button>
     </div>
-    <script src="main.js"></script>
+    <p id="gameFeedback"></p>
+  </div>
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
