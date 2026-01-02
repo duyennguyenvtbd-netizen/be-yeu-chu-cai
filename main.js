@@ -1,4 +1,4 @@
-const API_KEY = "DÁN_API_KEY_CỦA_BẠN_VÀO_ĐÂY";
+const API_KEY = "AIzaSyD-_BYD2oAaZVHR1tUE9ptV4yaDxlhzSMI";
 
 // Danh sách dữ liệu phong phú cho 3 phần
 const data = [
@@ -145,3 +145,4 @@ if ('webkitSpeechRecognition' in window) {
 }
 
 updatePronounce();
+
