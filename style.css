@@ -1,50 +1,30 @@
-body {
-    background-color: #fffae6;
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    justify-content: center;
-    color: #333;
-}
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
 
-.app-container {
-    max-width: 500px;
-    width: 100%;
-    text-align: center;
-    padding: 20px;
-}
+body { background: #fdfdfd; font-family: 'Quicksand', sans-serif; margin: 0; padding: 10px; }
+.main-container { max-width: 900px; margin: auto; text-align: center; }
 
-h1, h2 { color: #ff6600; text-transform: lowercase; }
+/* Menu ngang */
+.menu-tabs { display: flex; justify-content: space-around; background: #ffeb3b; border-radius: 20px; padding: 10px; margin-bottom: 20px; }
+.tab-btn { background: white; border: none; padding: 10px 20px; border-radius: 15px; font-weight: bold; color: #f57c00; cursor: pointer; font-size: 16px; }
+.tab-btn.active { background: #f57c00; color: white; }
 
-.char-display {
-    font-size: 120px;
-    font-weight: bold;
-    color: #4CAF50;
-    margin: 20px 0;
-    background: #fff;
-    border-radius: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
+/* Các Section */
+.content-section { display: none; }
+.content-section.active { display: block; }
 
-button {
-    padding: 15px 30px;
-    font-size: 18px;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    margin: 10px;
-    transition: 0.3s;
-}
+.card { background: white; border: 4px solid #81c784; border-radius: 30px; padding: 20px; box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+.big-char { font-size: 150px; color: #d81b60; line-height: 1; margin: 0; font-family: "Courier New", Courier, monospace; } /* Font giả nét in thường chuẩn */
 
-.btn-play { background-color: #2196F3; color: white; }
-.btn-record { background-color: #f44336; color: white; }
+#example-img { width: 200px; height: 150px; border-radius: 20px; object-fit: cover; }
+#example-text { font-size: 24px; font-weight: bold; color: #333; }
 
-.game-box {
-    background: #e1f5fe;
-    padding: 20px;
-    border-radius: 20px;
-    margin-top: 20px;
-}
+.feedback-box { background: #e8f5e9; border-radius: 15px; padding: 10px; margin: 10px 0; min-height: 40px; }
 
-.word-missing { font-size: 40px; margin-bottom: 20px; }
+/* Canvas tập tô */
+.canvas-container { position: relative; width: 300px; height: 300px; margin: auto; border: 2px dashed #ccc; border-radius: 10px; }
+#traceCanvas { position: absolute; top: 0; left: 0; z-index: 2; cursor: crosshair; }
+.trace-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; font-size: 250px; color: #eee; line-height: 300px; z-index: 1; pointer-events: none; }
 
-.feedback-text { font-style: italic; color: #555; min-height: 24px; }
+button { cursor: pointer; border: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; margin: 5px; }
+.btn-audio { background: #2196f3; color: white; }
+.btn-mic { background: #f44336; color: white; }
