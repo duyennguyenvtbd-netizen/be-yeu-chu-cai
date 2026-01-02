@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -7,62 +7,59 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="app-card">
-        <h1 class="title">bé học chữ cái</h1>
-        
-        <div class="display-area">
-            <div id="char-display" class="big-char">a</div>
-            
-            <div id="image-container">
-                <img id="example-img" src="" alt="hình minh họa">
-                <p id="example-text"></p>
-            </div>
-            
-            <div class="feedback-box">
-                <p id="feedback">chào con, mình cùng học nhé!</p>
-            </div>
-        </div>
+    <div class="main-container">
+        <nav class="menu-tabs">
+            <button onclick="showSection('pronounce')" class="tab-btn active">1. học phát âm</button>
+            <button onclick="showSection('trace')" class="tab-btn">2. bé tập tô</button>
+            <button onclick="showSection('game')" class="tab-btn">3. trò chơi</button>
+        </nav>
 
-        <div class="controls">
-            <button onclick="playSample()" class="btn-sample">nghe cô mẫu</button>
-            <button id="record-btn" class="btn-record">bấm để nói</button>
-        </div>
-
-        <div class="nav">
-     <!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bé Học Chữ Cái Tiếng Việt</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="app-card">
-        <h1 class="title">bé học chữ cái</h1>
-        
-        <div class="display-area">
-            <div id="char-display" class="big-char">a</div>
-            
-            <div id="image-container">
-                <img id="example-img" src="" alt="hình minh họa">
-                <p id="example-text"></p>
+        <section id="pronounce" class="content-section active">
+            <div class="card">
+                <div id="char-display" class="big-char">a</div>
+                <div class="illustration">
+                    <img id="example-img" src="https://images.unsplash.com/photo-1524704659690-3f7a3fe19bb2?w=400" alt="con cá">
+                    <p id="example-text">con cá</p>
+                </div>
+                <div class="feedback-box"><p id="feedback">cô mời bé học!</p></div>
+                <div class="btns">
+                    <button onclick="playSample()" class="btn-audio">nghe cô đọc</button>
+                    <button id="record-btn" class="btn-mic">bé phát âm</button>
+                </div>
+                <div class="nav-char">
+                    <button onclick="changeChar(-1)">chữ trước</button>
+                    <button onclick="changeChar(1)">chữ sau</button>
+                </div>
             </div>
-            
-            <div class="feedback-box">
-                <p id="feedback">chào con, mình cùng học nhé!</p>
+        </section>
+
+        <section id="trace" class="content-section">
+            <div class="card">
+                <h3>bé hãy tô theo nét đứt nhé</h3>
+                <div class="canvas-container">
+                    <canvas id="traceCanvas" width="300" height="300"></canvas>
+                    <div id="trace-guide" class="trace-bg">a</div>
+                </div>
+                <div class="btns">
+                    <button onclick="clearCanvas()">tô lại</button>
+                    <button onclick="nextTrace()">chữ tiếp theo</button>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div class="controls">
-            <button onclick="playSample()" class="btn-sample">nghe cô mẫu</button>
-            <button id="record-btn" class="btn-record">bấm để nói</button>
-        </div>
-
-        <div class="nav">
-            <button onclick="changeChar(-1)" class="btn-nav">chữ trước</button>
-            <button onclick="changeChar(1)" class="btn-nav">chữ sau</button>
-        </div>
+        <section id="game" class="content-section">
+            <div class="card">
+                <img id="game-img" src="https://images.unsplash.com/photo-1540244495603-d8a18397af2b?w=400" alt="con khỉ">
+                <div class="quiz-container">
+                    <p id="quiz-word">c_n khỉ</p>
+                    <div class="options">
+                        <button onclick="checkGame('o')">o</button>
+                        <button onclick="checkGame('a')">a</button>
+                        <button onclick="checkGame('u')">u</button>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
     <script src="main.js"></script>
 </body>
