@@ -1,66 +1,42 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bé Học Chữ Cái Tiếng Việt</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="main-container">
-        <nav class="menu-tabs">
-            <button onclick="showSection('pronounce')" class="tab-btn active">1. học phát âm</button>
-            <button onclick="showSection('trace')" class="tab-btn">2. bé tập tô</button>
-            <button onclick="showSection('game')" class="tab-btn">3. trò chơi</button>
-        </nav>
+/* Tải font chữ tròn trịa giống chữ tập viết nhất */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
 
-        <section id="pronounce" class="content-section active">
-            <div class="card">
-                <div id="char-display" class="big-char">a</div>
-                <div class="illustration">
-                    <img id="example-img" src="https://images.unsplash.com/photo-1524704659690-3f7a3fe19bb2?w=400" alt="con cá">
-                    <p id="example-text">con cá</p>
-                </div>
-                <div class="feedback-box"><p id="feedback">cô mời bé học!</p></div>
-                <div class="btns">
-                    <button onclick="playSample()" class="btn-audio">nghe cô đọc</button>
-                    <button id="record-btn" class="btn-mic">bé phát âm</button>
-                </div>
-                <div class="nav-char">
-                    <button onclick="changeChar(-1)">chữ trước</button>
-                    <button onclick="changeChar(1)">chữ sau</button>
-                </div>
-            </div>
-        </section>
+body { background: #fffde7; font-family: 'Quicksand', sans-serif; margin: 0; padding: 10px; }
+.main-container { max-width: 800px; margin: auto; }
 
-        <section id="trace" class="content-section">
-            <div class="card">
-                <h3>bé hãy tô theo nét đứt nhé</h3>
-                <div class="canvas-container">
-                    <canvas id="traceCanvas" width="300" height="300"></canvas>
-                    <div id="trace-guide" class="trace-bg">a</div>
-                </div>
-                <div class="btns">
-                    <button onclick="clearCanvas()">tô lại</button>
-                    <button onclick="nextTrace()">chữ tiếp theo</button>
-                </div>
-            </div>
-        </section>
+/* Menu 3 cột ngang */
+.menu-tabs { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr; 
+    gap: 10px; 
+    background: #ffb300; 
+    padding: 10px; 
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+.tab-btn { 
+    background: #fff; border: none; padding: 15px 5px; 
+    border-radius: 15px; font-weight: bold; color: #e65100; 
+    cursor: pointer; font-size: 16px; text-transform: lowercase;
+}
+.tab-btn.active { background: #e65100; color: white; }
 
-        <section id="game" class="content-section">
-            <div class="card">
-                <img id="game-img" src="https://images.unsplash.com/photo-1540244495603-d8a18397af2b?w=400" alt="con khỉ">
-                <div class="quiz-container">
-                    <p id="quiz-word">c_n khỉ</p>
-                    <div class="options">
-                        <button onclick="checkGame('o')">o</button>
-                        <button onclick="checkGame('a')">a</button>
-                        <button onclick="checkGame('u')">u</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-    <script src="main.js"></script>
-</body>
-</html>
+/* Khu vực hiển thị chữ cái in thường chuẩn */
+.big-char { 
+    font-size: 160px; 
+    color: #2e7d32; 
+    font-family: 'Arial', sans-serif; /* Arial hiện chữ a thường bụng tròn tốt hơn các font khác */
+    font-weight: normal;
+    margin: 10px 0;
+}
+
+.content-section { display: none; background: white; border-radius: 30px; padding: 20px; border: 5px solid #ffb300; }
+.content-section.active { display: block; text-align: center; }
+
+#example-img { width: 100%; max-width: 300px; height: 200px; object-fit: cover; border-radius: 20px; border: 3px solid #eee; }
+.feedback-box { background: #f1f8e9; padding: 15px; border-radius: 15px; margin: 15px 0; color: #444; font-weight: bold; }
+
+/* Nút bấm lớn cho trẻ */
+.btns button { font-size: 18px; padding: 15px 25px; border-radius: 20px; border: none; margin: 5px; color: white; cursor: pointer; }
+.btn-audio { background: #03a9f4; }
+.btn-mic { background: #f44336; }
