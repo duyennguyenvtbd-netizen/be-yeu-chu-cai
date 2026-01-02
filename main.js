@@ -1,59 +1,103 @@
-const API_KEY = "AIzaSyANHXdmXZ8aMRKURZ09bDxAYLfgbFo4tY8";
-
-const data = [
-    { 
-        char: 'a', sound: 'a', text: 'con cá', 
-        img: 'https://images.unsplash.com/photo-1524704659690-3f7a3fe19bb2?w=600',
-        quiz: 'c_n cá', qImg: 'https://images.unsplash.com/photo-1524704659690-3f7a3fe19bb2?w=600'
-    },
-    { 
-        char: 'ă', sound: 'á', text: 'mặt trăng', 
-        img: 'https://images.unsplash.com/photo-1532667449560-72a95c8d381b?w=600',
-        quiz: 'mặt tr_ng', qImg: 'https://images.unsplash.com/photo-1532667449560-72a95c8d381b?w=600'
-    },
-    { 
-        char: 'â', sound: 'ớ', text: 'quả nấm', 
-        img: 'https://images.unsplash.com/photo-1504672281656-e4981d70414b?w=600',
-        quiz: 'quả n_m', qImg: 'https://images.unsplash.com/photo-1504672281656-e4981d70414b?w=600'
-    },
-    { 
-        char: 'b', sound: 'bờ', text: 'con bò', 
-        img: 'https://images.unsplash.com/photo-1543955444-202284915af5?w=600',
-        quiz: 'con b_', qImg: 'https://images.unsplash.com/photo-1543955444-202284915af5?w=600'
-    },
-    { 
-        char: 'đ', sound: 'đờ', text: 'quả đu đủ', 
-        img: 'https://images.unsplash.com/photo-1526907194377-dc0d408a3f12?w=600', // Đu đủ thực tế
-        quiz: 'quả đ_ đủ', qImg: 'https://images.unsplash.com/photo-1526907194377-dc0d408a3f12?w=600'
-    }
-];
-
-let idx = 0;
-
+/* chuyển màn hình */
 function showSection(id) {
-    document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    event.target.classList.add('active');
-    if(id === 'trace') initCanvas();
+  document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
 }
 
-function updateUI() {
-    const item = data[idx];
-    document.getElementById('char-display').innerText = item.char;
-    document.getElementById('example-text').innerText = item.text;
-    document.getElementById('example-img').src = item.img;
-    // Cập nhật game
-    document.getElementById('game-img').src = item.qImg;
-    document.getElementById('quiz-word').innerText = item.quiz;
+/* ----------------
+   học phát âm
+---------------- */
+const letters = ['a','ă','â','b','c','d','đ','e','ê','g','h','i','k','l','m','n','o','ô','ơ','p','q','r','s','t','u','ư','v','x','y'];
+let letterIndex = 0;
+
+function playLetter() {
+  const letter = letters[letterIndex];
+  const utter = new SpeechSynthesisUtterance(letter);
+  utter.lang = 'vi-vn';
+  speechSynthesis.speak(utter);
 }
 
-function playSample() {
-    const item = data[idx];
-    const msg = new SpeechSynthesisUtterance(item.sound);
-    msg.lang = 'vi-VN';
-    window.speechSynthesis.speak(msg);
+function nextLetter() {
+  letterIndex = (letterIndex + 1) % letters.length;
+  document.getElementById('currentLetter').innerText = letters[letterIndex];
+  document.getElementById('feedback').innerText = '';
 }
 
-// ... (Giữ nguyên phần vẽ Canvas và Ghi âm như mã trước) ...
-// Nhớ thêm phần ghi âm để AI nhận xét
+function startListening() {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) {
+    alert('trình duyệt chưa hỗ trợ nghe giọng nói');
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+  recognition.lang = 'vi-vn';
+  recognition.start();
+
+  recognition.onresult = function(event) {
+    const spoken = event.results[0][0].transcript.trim().toLowerCase();
+    const correct = letters[letterIndex];
+
+    if (spoken.includes(correct)) {
+      speakFeedback('con phát âm rất đúng rồi');
+      document.getElementById('feedback').innerText = 'con phát âm rất đúng rồi';
+    } else {
+      speakFeedback('con thử nói lại nhé, chữ này là ' + correct);
+      document.getElementById('feedback').innerText = 'con thử nói lại nhé, chữ này là ' + correct;
+    }
+  };
+}
+
+function speakFeedback(text) {
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'vi-vn';
+  speechSynthesis.speak(utter);
+}
+
+/* ----------------
+   vẽ theo nét
+---------------- */
+const canvas = document.getElementById('drawCanvas');
+const ctx = canvas.getContext('2d');
+let drawing = false;
+
+canvas.addEventListener('mousedown', () => drawing = true);
+canvas.addEventListener('mouseup', () => drawing = false);
+canvas.addEventListener('mousemove', draw);
+
+function draw(e) {
+  if (!drawing) return;
+  ctx.lineWidth = 5;
+  ctx.lineCap = 'round';
+  ctx.strokeStyle = '#4caf50';
+  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(e.offsetX, e.offsetY);
+}
+
+function clearCanvas() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.beginPath();
+  document.getElementById('drawFeedback').innerText = 'con vẽ rất cố gắng rồi, tiếp tục nhé';
+  speakFeedback('con vẽ rất cố gắng rồi, tiếp tục nhé');
+}
+
+/* ----------------
+   trò chơi điền chữ
+---------------- */
+const game = {
+  word: 'c_n mèo',
+  missing: 'o',
+  full: 'con mèo'
+};
+
+function chooseLetter(letter) {
+  if (letter === game.missing) {
+    document.getElementById('gameFeedback').innerText = 'đúng rồi, ' + game.full;
+    speakFeedback('đúng rồi, ' + game.full);
+  } else {
+    document.getElementById('gameFeedback').innerText = 'chưa đúng, con thử lại nhé';
+    speakFeedback('chưa đúng, con thử lại nhé');
+  }
+}
